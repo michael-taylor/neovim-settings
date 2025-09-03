@@ -1,4 +1,7 @@
-# 💤 LazyVim
+# Installing
 
-A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
-Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
+To install this Neovim configuration, perform the following step:
+
+* Linux: `git clone https://github.com/michael-taylor/neovim-settings.git ~/.config/nvim`
+* Windows: `git clone https://github.com/michael-taylor/neovim-settings.git $env:LOCALAPPDATA/nvim`
+
