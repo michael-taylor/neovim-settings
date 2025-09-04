@@ -5,8 +5,15 @@
 To install the prerequisite utilities, Scoop can be used on Windows by running
 this command:
 
-```
+```powershell
 scoop import scoop-pkgs.json
+```
+
+On Fedora Linux, the following command will install the prerequisites:
+
+```bash
+sudo dnf copr enable dejan/lazygit
+sudo dnf install fd fzf lua luarocks nodejs ripgrep lazygit
 ```
 
 ## Installing
