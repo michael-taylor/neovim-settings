@@ -21,12 +21,16 @@ o.scrolloff = 8                    -- Always have at least 8 characters above/be
 o.signcolumn = "yes"               -- Always show signcolumn
 o.list = true                      -- Show whitespace
 o.winborder = "rounded"            -- Show rounded borders on popup windows
+o.showtabline = 2                  -- Always show tabline
 o.showmode = false                 -- Hide the mode line
 vim.g.editorconfig = true          -- Support Editorconfig
 vim.g.netrw_keepdir = true         -- Keep netrw dir synced with current dir
 vim.g.netrw_banner = false         -- Hide netrw banner
+vim.g.netrw_liststyle = 3          -- Tree style listing
+vim.g.netrw_winsize = 20           -- Set size of netrw
                                    -- Hide hidden files by default in netrw
 vim.g.netrw_list_hide = [[\(^\|\s\s\)\zs\.\S\+]]
+vim.g.mapleader = " "              -- set SPACE to be leader
 
 -- Use Powershell instead of CMD on windows
 if vim.fn.has('win32') then
