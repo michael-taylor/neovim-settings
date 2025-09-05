@@ -9,6 +9,7 @@ vim.pack.add({
 local cmp = require("cmp")
 local types = require("cmp.types")
 local luasnip = require("luasnip")
+local auto_select = true
 
 cmp.setup({
   performance = {
@@ -24,15 +25,12 @@ cmp.setup({
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
+  preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
   mapping = cmp.mapping.preset.insert({
-    ["<C-space>"] = function()
-      if cmp.visible() then
-        cmp.abort()
-      else
-        cmp.complete()
-      end
-    end,
-    ["<CR>"] = cmp.mapping.confirm({ select = true })
+    ["<C-space>"] = cmp.mapping.complete(),
+    ["<tab>"] = cmp.mapping.confirm({ select = true }),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-c>"] = cmp.mapping.scroll_docs(4),
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
@@ -42,5 +40,7 @@ cmp.setup({
   })
 })
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
 luasnip.config.setup({ history = true })
