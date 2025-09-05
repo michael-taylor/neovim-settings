@@ -1,10 +1,10 @@
+-- Plugins: nvim-treesitter and helpers
 vim.pack.add({
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+  "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/nvim-treesitter/nvim-treesitter-context",
+  "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
 })
 
-local augroup = vim.api.nvim_create_augroup("michaeltaylor.cfg", { clear = false })
-local autocmd = vim.api.nvim_create_autocmd
 local ts_ensure_installed = {
   "bash",
   "c",
@@ -35,9 +35,38 @@ local ts_ensure_installed = {
   "xml",
   "yaml",
 }
-require("nvim-treesitter").setup({
+local augroup = vim.api.nvim_create_augroup("michaeltaylor.cfg", { clear = false })
+local autocmd = vim.api.nvim_create_autocmd
+
+require("nvim-treesitter.configs").setup({
+  auto_install = true,
   ensure_installed = ts_ensure_installed,
+  highlight = {
+    enable = true,
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = { -- In visual mode
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+        ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
+      },
+      include_surrounding_whitespace = true,
+    },
+    move = {
+      enable = true,
+      goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
+      goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
+      goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
+      goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
+    },
+  },
 })
+
 autocmd("PackChanged", { -- update treesitter parsers/queries with plugin updates
   group = augroup,
   callback = function(ev)
