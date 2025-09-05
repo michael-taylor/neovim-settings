@@ -11,6 +11,7 @@
   * git
   * rg
   * tar
+  * tree-sitter
   * unzip
 --]]
 
@@ -38,6 +39,10 @@ o.signcolumn = "yes"               -- Always show signcolumn
 o.list = true                      -- Show whitespace
 o.winborder = "rounded"            -- Show rounded borders on popup windows
 vim.g.editorconfig = true          -- Support Editorconfig
+vim.g.netrw_keepdir = true         -- Keep netrw dir synced with current dir
+vim.g.netrw_banner = false         -- Hide netrw banner
+                                   -- Hide hidden files by default in netrw
+vim.g.netrw_list_hide = [[\(^\|\s\s\)\zs\.\S\+]]
 
 -- Use Powershell instead of CMD on windows
 if vim.fn.has('win32') then
@@ -58,7 +63,7 @@ local map = vim.keymap.set
 vim.g.mapleader = " "                                          -- set SPACE to be leader
 map("i", "jj", "<Esc>", opts)                                  -- 'jj' to exit insert mode
 
--- Motions
+-- Motion improvements
 map("v", "J", ":m '>+1<CR>gv=gv", opts)                        -- move highlighted lines down
 map("v", "K", ":m '<-2<CR>gv=gv", opts)                        -- move highlighted lines up
 map("n", "J", "mzJ`z", opts)                                   -- stay in place when combining lines
@@ -83,7 +88,7 @@ map("n", "<leader>F", vim.lsp.buf.format, opts)                -- Format, format
 map("n", "<leader>lg", "<cmd>LazyGit<CR>", opts)               -- LazyGit, open LazyGit
 
 --[[ File-type specific options ]]
-local augroup = vim.api.nvim_create_augroup("mtaylor.cfg", { clear = true })
+local augroup = vim.api.nvim_create_augroup("michaeltaylor.cfg", { clear = true })
 local autocmd = vim.api.nvim_create_autocmd
 
 --[[ Plugins ]]
@@ -105,6 +110,8 @@ vim.pack.add({
   "https://github.com/ibhagwan/fzf-lua",
   "https://github.com/lewis6991/gitsigns.nvim",
   "https://github.com/kdheepak/lazygit.nvim",
+  "https://github.com/folke/twilight.nvim",
+  "https://github.com/folke/zen-mode.nvim",
 })
 
 -- Tokyonight setup
@@ -272,3 +279,16 @@ require("gitsigns").setup()
 -- lazygit.nvim will give us the following keymaps by default:
 --    <leader>lg: Open lazygit
 require("lazygit")
+
+-- Twilight
+require("twilight").setup()
+map("n", "<leader>q", "<cmd>Twilight<CR>", { desc = "Twilight mode", noremap = true, silent = true })
+-- ZenMode setup
+require("zen-mode").setup({
+  plugins = {
+    neovide = {
+      enabled = true,
+    }
+  }
+})
+map("n", "<leader>z", function() require("zen-mode").toggle() end, { desc = "Zen mode", noremap = true, silent = true })
