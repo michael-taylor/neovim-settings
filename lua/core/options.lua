@@ -21,6 +21,7 @@ o.scrolloff = 8                    -- Always have at least 8 characters above/be
 o.signcolumn = "yes"               -- Always show signcolumn
 o.list = true                      -- Show whitespace
 o.winborder = "rounded"            -- Show rounded borders on popup windows
+o.showmode = false                 -- Hide the mode line
 vim.g.editorconfig = true          -- Support Editorconfig
 vim.g.netrw_keepdir = true         -- Keep netrw dir synced with current dir
 vim.g.netrw_banner = false         -- Hide netrw banner
@@ -39,3 +40,7 @@ end
 --[[ GUI ]]
 o.termguicolors = true
 o.guifont = "JetBrainsMonoNL Nerd Font Mono:h12"
+
+vim.diagnostic.config({
+  float = { border = "rounded" },
+})
