@@ -48,7 +48,7 @@ require("nvim-treesitter.configs").setup({
     select = {
       enable = true,
       lookahead = true,
-      keymaps = { -- In visual mode
+      keymaps = { -- in VISUAL mode
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
         ["ac"] = "@class.outer",
@@ -57,7 +57,7 @@ require("nvim-treesitter.configs").setup({
       },
       include_surrounding_whitespace = true,
     },
-    move = {
+    move = { -- in NORMAL mode
       enable = true,
       goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
       goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },

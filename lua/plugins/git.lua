@@ -4,7 +4,4 @@ vim.pack.add({
 })
 
 require("gitsigns").setup()
-
--- lazygit.nvim will give us the following keymaps by default:
---    <leader>lg: Open lazygit
 require("lazygit")

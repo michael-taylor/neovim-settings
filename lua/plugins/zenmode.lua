@@ -5,14 +5,13 @@ vim.pack.add({
 
 -- Twilight
 require("twilight").setup()
-vim.keymap.set("n", "<leader>xt", "<cmd>Twilight<CR>", { desc = "Twilight mode", noremap = true, silent = true })
 
 -- ZenMode setup
 require("zen-mode").setup({
   plugins = {
     neovide = {
       enabled = true,
+      scale = 1.1,
     }
   }
 })
-vim.keymap.set("n", "<leader>xz", function() require("zen-mode").toggle() end, { desc = "Zen mode", noremap = true, silent = true })
