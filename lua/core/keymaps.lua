@@ -10,7 +10,8 @@ mapn("<C-c>", ":nohl<CR>")                              -- Ctrl-c to remove high
 mapn("<leader>w", function() vim.cmd("silent! w") end)  -- save file
 mapn("<leader>q", function() vim.cmd("silent! q!") end) -- quit all (exit if not unsaved files)
 mapn("<leader>y", "\"+y")                               -- yank into the system clipboard
-mapx("<leader>p", "\"_dP")                              -- paste preserving current yanked text
+mapn("<leader>p", "\"+p")                               -- paste from the system clipboard
+mapx("<leader>P", "\"_dP")                              -- paste preserving current yanked text
 
 --[[ Motions ]]
 mapn("<C-d>", "<C-d>zz")                                -- leave scrolloff area when half-page jumping
